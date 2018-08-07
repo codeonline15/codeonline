@@ -74,6 +74,7 @@ Clubbing entities together to represent a generalized view - Generalization
 Reverse -> specialization - Group of entities is divided into sub grps based on characteristics
 
 -- Codd's 12 Rules -- 
+https://www.studytonight.com/dbms/codd-rule.php
 
 Relational Data Model
 
