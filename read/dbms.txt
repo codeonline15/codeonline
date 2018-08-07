@@ -1,0 +1,268 @@
+https://www.tutorialspoint.com/dbms
+and
+https://www.studytonight.com/dbms/
+
+DB - collection of related data organised so that it can be easily accessed, managed and updated.
+can be SW or HW based
+store data
+
+Earlier done on tapes - slow and bulky
+
+DBMS
+  SW that allows creation, definition, manipulation of db allowing to store process and analyse data easily
+  provides protection and security to db
+  maintains data consistency
+  provides simple query language
+  create user accounts with different access permissions
+
+
+Components:
+Hardware
+Software
+Data
+Procedures
+Database Access Language
+
+The DBMS software is capable of understanding the Database Access Language and intrepret it into actual database commands to execute them on the DB.
+
+In a typical Database, the user saved Data is present and meta data is stored.
+
+An application interface known as ODBC(Open Database Connectivity) provides an API that allow client side program to call the DBMS.
+
+A Database model defines the logical design and structure of a database and defines how data will be stored, accessed and updated in a database management system
+
+Types of DB Model
+  Hierarchical Model
+  Network Model
+  Entity-relationship Model
+    Entities and attributes
+    Relationship between entities
+  Relational Model
+    data organised in 2-d tables
+    relationship maintained by storing a common field
+
+ER Model
+Entity is generally a real-world object which has characteristics and holds relationships in a DBMS.
+
+Attributes:
+Simple attribute
+Composite attribute
+Derived attribute
+Single-valued attribute
+Multi-valued attribute
+
+Keys:
+Super Key
+Candidate Key
+Primary Key
+
+Weak entity is an entity that depends on another entity. Weak entity doesn't have anay key attribute of its own
+
+When an Entity is related with itself it is known as Recursive Relationship.
+
+
+Physical Database Schema − This schema pertains to the actual storage of data and its form of storage like files, indices, etc.
+
+Logical Database Schema − This schema defines all the logical constraints that need to be applied on the data stored. It defines tables, views, and integrity constraints.
+
+Total Participation − Each entity is involved in the relationship. Total participation is represented by double lines.
+
+Partial participation − Not all entities are involved in the relationship. Partial participation is represented by single lines.
+
+
+Clubbing entities together to represent a generalized view - Generalization
+Reverse -> specialization - Group of entities is divided into sub grps based on characteristics
+
+-- Codd's 12 Rules -- 
+
+Relational Data Model
+
+Relational Integrity Constraints
+Key Constraints: There must be at least one minimal subset of attributes in the relation, which can identify a tuple uniquely.
+
+Domain Constraints: example, age can only be a positive integer
+
+Referential integrity Constraints: work on the concept of Foreign Keys
+
+Data Definition Language:
+create, drop, alter
+
+Data Manipulation Language:
+select, insert, update, delete
+
+
+
+Normalisation
+
+1NF:
+all the attributes in a relation must have atomic domains
+Eg:
+Incorrect:
+Programming - Java, C++
+Correct:
+Programming - Java
+Programming - C++
+
+
+2NF:
+every non-prime attribute should be fully functionally dependent on prime key attribute. That is, if X → A holds, then there should not be any proper subset Y of X, for which Y → A also holds true.
+
+
+3NF:
+No non-prime attribute is transitively dependent on prime key attribute.
+For any non-trivial functional dependency, X → A, then either −
+  X is a superkey or,
+  A is prime attribute.
+
+Boyce-Codd Normal Form:
+For any non-trivial functional dependency, X → A, X must be a super-key.
+
+JOINS:
+
+INNER JOINS
+
+Theta join
+
+Student
+SID Name  Std
+101 Alex  10
+102 Maria 11
+
+Subjects
+Class Subject
+10  Math
+10  English
+11  Music
+11  Sports
+
+Student theta(Student.std=Subject.class)  Subject
+SID Name  Std Class Subject
+101 Alex  10  10  Math
+101 Alex  10  10  English
+102 Maria 11  11  Music
+102 Maria 11  11  Sports
+
+
+Natural join
+- does not use comparison operator
+- needs atleast one common attr
+
+Courses
+CID Course  Dept
+CS01  Database  CS
+ME01  Mechanics ME
+EE01  Electronics EE
+
+HoD
+Dept  Head
+CS  Alex
+ME  Maya
+EE  Mira
+
+Courses NaturalJoin HoD
+Dept  CID Course  Head
+CS  CS01  Database  Alex
+ME  ME01  Mechanics Maya
+EE  EE01  Electronics Mira
+
+Outer Joins
+
+Left Outer Join
+
+Left
+A B
+100 Database
+101 Mechanics
+102 Electronics
+
+Right
+A B
+100 Alex
+102 Maya
+104 Mira
+
+Courses Left Outer Join HoD
+A B C D
+100 Database  100 Alex
+101 Mechanics --- ---
+102 Electronics 102 Maya
+
+
+
+Right Outer Join
+
+Courses Right Outer Join HoD
+A B C D
+100 Database  100 Alex
+102 Electronics 102 Maya
+--- ---       104 Mira
+
+
+
+Full Outer Join
+
+100 Database  100 Alex
+101 Mechanics --- ---
+102 Electronics 102 Maya
+--- --- 104 Mira
+
+RAID or Redundant Array of Independent Disks, is a technology to connect multiple secondary storage devices and use them as a single storage media. consists of an array of disks in which multiple disks are connected together to achieve different goals
+
+Indexing is a data structure technique to efficiently retrieve records from the database files based on some attributes on which the indexing has been done. 
+
+Indexing Types:
+Primary Index: defined on an ordered data file. ordered on key field which is mostly the primary key
+Secondary Index: May be from candidate key and has unique value in every record or non-key with duplicate values
+Clustering Index: data file ordered on a non-key field
+
+Ordered Indexing - two types:
+Dense Index:
+index record for every search key value in the database.
+searching faster but requires more space to store index records.
+Index records contain search key value and a pointer to the actual record on the disk.
+
+Sparse Index:
+http://www.cs.sfu.ca/CourseCentral/354/zaiane/material/notes/Chapter11/node5.html
+Index records are created only for some of the records.
+To locate a record, we find the index record with the largest search key value less than or equal to the search key value we are looking for.
+We start at that record pointed to by the index record, and proceed along the pointers in the file (that is, sequentially) until we find the desired record.
+
+A good compromise: to have a sparse index with one entry per block.
+
+Multilevel Index:
+
+idea is to reduce the part of the index that we continue to search by a larger factor
+
+The index file is called the first level of a multilevel index. It is an ordered file with a distinct value for each key value K(i). Therefore we can create a primary index for the first level.  This index to the first level is called the second level of the multilevel index.
+
+Multi-level Index helps in breaking down the index into several smaller indices in order to make the outermost level so small that it can be saved in a single disk block
+
+B+ tree:
+balanced bst that follows multi-level index format
+leaf nodes have actual data pointers
+ensures all leaf nodes are at same height
+
+
+A transaction in a database system must maintain Atomicity, Consistency, Isolation, and Durability 
+
+In case a system is stuck in a deadlock, the transactions involved in the deadlock are either rolled back or restarted.
+
+Deadlock Prevention:
+
+Wait-Die Scheme
+In this scheme, if a transaction requests to lock a resource (data item), which is already held with a conflicting lock by another transaction, then one of the two possibilities may occur −
+
+If TS(Ti) < TS(Tj) − that is Ti, which is requesting a conflicting lock, is older than Tj − then Ti is allowed to wait until the data-item is available.
+
+If TS(Ti) > TS(tj) − that is Ti is younger than Tj − then Ti dies. Ti is restarted later with a random delay but with the same timestamp.
+
+Wound-Wait Scheme
+In this scheme, if a transaction requests to lock a resource (data item), which is already held with conflicting lock by some another transaction, one of the two possibilities may occur −
+
+If TS(Ti) < TS(Tj), then Ti forces Tj to be rolled back − that is Ti wounds Tj. Tj is restarted later with a random delay but with the same timestamp.
+
+If TS(Ti) > TS(Tj), then Ti is forced to wait until the resource is available.
+
+Deadlock avoidance: 
+wait-for graph - good for lightweight transaction systems. Else, deadlock prevention is  better
+graph for every transaction waiting for data items held by others
